@@ -17,10 +17,10 @@
     "skipLibCheck": true
   },
   "include": [
-    "frontend/**/*.ts",
-    "frontend/**/*.d.ts",
-    "frontend/**/*.tsx",
-    "frontend/**/*.vue"
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
   ],
   "references": [
     {
