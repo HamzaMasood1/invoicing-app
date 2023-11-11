@@ -198,6 +198,6 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 </script>
