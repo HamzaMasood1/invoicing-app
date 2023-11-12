@@ -125,23 +125,16 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import {
-  Bars3Icon,
-  BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
   XMarkIcon,
+  DocumentIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import Form from "./components/Form.vue";
 
 const navigation = [
-  { name: 'Dashboard', to: '/', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', to: '/search', href: '#', icon: UsersIcon, current: false },
+  { name: 'Create Invoice', to: '/', href: '#', icon: DocumentIcon, current: true },
+  { name: 'List Invoice', to: '/search', href: '#', icon: MagnifyingGlassIcon, current: false },
 ]
 
 const userNavigation = [

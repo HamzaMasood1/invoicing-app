@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 import New from './components/Form.vue'
-import Search from './components/Table.vue'
+import Search from './components/List-invoices.vue'
 
 const routes = [
   {
