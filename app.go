@@ -57,6 +57,28 @@ func (a *App) Save(firstName string, lastName string) string {
 		fmt.Println(err)
 	}
 	backend.AddName(db, newName)
-	defer db.Close()
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+
+		}
+	}(db)
 	return fmt.Sprintf("User has been saved")
+}
+
+// Get all names
+func (a *App) GetAllNames() []backend.Name {
+	db, err := sql.Open("sqlite3", "./database.db")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	names := backend.GetAllNames(db)
+	defer func(db *sql.DB) {
+		err := db.Close()
+		if err != nil {
+
+		}
+	}(db)
+	return names
 }

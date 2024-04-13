@@ -21,15 +21,25 @@ func AddName(db *sql.DB, newName Name) {
 	fmt.Printf("Added %v %v \n", newName.FirstName, newName.LastName)
 }
 
-func getAllNames(db *sql.DB, ourID string) Name {
-
-	rows, _ := db.Query("SELECT ID, firstName, lastName FROM names")
+func GetAllNames(db *sql.DB) []Name {
+	rows, err := db.Query("SELECT ID, firstName, lastName FROM names")
+	if err != nil {
+		fmt.Println("oh no")
+	}
 	defer rows.Close()
 
-	names := Name{}
+	var names []Name
 
 	for rows.Next() {
-		rows.Scan(&names.ID, &names.FirstName, &names.LastName)
+		var name Name
+		if err := rows.Scan(&name.ID, &name.FirstName, &name.LastName); err != nil {
+			fmt.Println("oh no")
+		}
+		names = append(names, name)
+	}
+
+	if err := rows.Err(); err != nil {
+		fmt.Println("oh no")
 	}
 
 	return names

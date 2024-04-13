@@ -15,32 +15,20 @@
           <table class="min-w-full divide-y divide-gray-300">
             <thead>
             <tr>
-              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Transaction ID</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Company</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Share</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Commision</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Quantity</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Net amount</th>
+              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">First Name</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Last Name</th>
               <th scope="col" class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-0">
                 <span class="sr-only">Edit</span>
               </th>
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-            <tr v-for="transaction in transactions" :key="transaction.id">
-              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{{ transaction.id }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ transaction.company }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ transaction.share }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ transaction.commission }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ transaction.price }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ transaction.quantity }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ transaction.netAmount }}</td>
-              <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                >Edit<span class="sr-only">, {{ transaction.id }}</span></a
-                >
-              </td>
+            <tr v-for="name in allNames" :key="name.ID">
+              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">{{ name.ID }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ name.FirstName }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ name.LastName }}</td>
+              <td class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"><a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">{{ name.ID }}</span></a></td>
             </tr>
             </tbody>
           </table>
@@ -51,16 +39,12 @@
 </template>
 
 <script setup lang="ts">
-const transactions = [
-  {
-    id: 'AAPS0L',
-    company: 'Chase & Co.',
-    share: 'CAC',
-    commission: '+$4.37',
-    price: '$3,509.00',
-    quantity: '12.00',
-    netAmount: '$4,397.00',
-  },
-  // More transactions...
-]
+import {GetAllNames, Save} from "../../wailsjs/go/main/App";
+import {ref} from "vue";
+
+const allNames = ref([]);
+
+GetAllNames().then((result: any) => {
+  allNames.value = result;
+});
 </script>
