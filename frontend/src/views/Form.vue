@@ -23,15 +23,14 @@
       <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
       <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="greet">Save</button>
       <p>{{data.resultText}}</p>
-      <p>{{firstName}}</p>
-      <p>{{lastName}}</p>
+      <p>{{saved.resultText}}</p>
     </div>
   </form>
 </template>
 
 <script setup>
 import {reactive, ref} from "vue";
-import {Greet} from "../../wailsjs/go/main/App";
+import {Greet, Save} from "../../wailsjs/go/main/App";
 
 const firstName = ref("");
 const lastName = ref("");
@@ -39,10 +38,16 @@ const data = reactive({
   resultText: "Please enter your name below 👇",
 });
 
+const saved = reactive({
+  resultText: "",
+});
 function greet() {
   const fullName = `${firstName.value} ${lastName.value}`;
   Greet(fullName).then(result => {
     data.resultText = result;
+  });
+  Save(firstName.value, lastName.value).then(result => {
+    saved.resultText = result;
   });
 }
 

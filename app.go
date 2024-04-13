@@ -1,7 +1,9 @@
 package main
 
 import (
+	"changeme/backend"
 	"context"
+	"database/sql"
 	"fmt"
 )
 
@@ -42,4 +44,19 @@ func (a *App) shutdown(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+// Saves to the DB
+func (a *App) Save(firstName string, lastName string) string {
+	newName := backend.Name{
+		FirstName: firstName,
+		LastName:  lastName,
+	}
+	db, err := sql.Open("sqlite3", "./database.db")
+	if err != nil {
+		fmt.Println(err)
+	}
+	backend.AddName(db, newName)
+	defer db.Close()
+	return fmt.Sprintf("User has been saved")
 }

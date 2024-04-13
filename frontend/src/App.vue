@@ -277,7 +277,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import {
   Dialog,
@@ -302,7 +302,7 @@ const navigation = ref([
   { name: "New Invoice", href: "/", icon: HomeIcon, current: true },
   { name: "Search", href: "/about", icon: MagnifyingGlassIcon, current: false },
 ]);
-const updateCurrent = (clickedItem) => {
+const updateCurrent = (clickedItem: any) => {
   navigation.value.forEach((item) => {
     item.current = false;
   });
